@@ -20,22 +20,15 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ==========================================================================
-     1. HERO IMAGE SLIDER
+     1. HERO IMAGE SLIDER (CONTINUOUS AUTO-SLIDE, NO BUTTONS)
      ========================================================================== */
   const slider = document.getElementById('heroSlider');
   const sliderTrack = document.getElementById('sliderTrack');
   const slides = document.querySelectorAll('.slide-item');
-  const progressBtns = document.querySelectorAll('.progress-bar-btn');
-  const prevBtn = document.getElementById('sliderPrevBtn');
-  const nextBtn = document.getElementById('sliderNextBtn');
-  const pauseBtn = document.getElementById('sliderPauseBtn');
-  const pauseIcon = pauseBtn ? pauseBtn.querySelector('.pause-icon') : null;
-  const playIcon = pauseBtn ? pauseBtn.querySelector('.play-icon') : null;
 
   let currentSlide = 0;
   let slideTimer = null;
   const SLIDE_DURATION = 4000;
-  let isPaused = false;
 
   function showSlide(index) {
     currentSlide = (index + slides.length) % slides.length;
@@ -52,26 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         slide.classList.remove('active');
       }
-      progressBtns[i].classList.remove('active');
-      progressBtns[i].classList.remove('paused');
-      progressBtns[i].setAttribute('aria-selected', 'false');
     });
-
-    // Re-trigger progress bar animation
-    const activeBtn = progressBtns[currentSlide];
-    if (activeBtn) {
-      const fill = activeBtn.querySelector('.progress-fill');
-      if (fill) {
-        fill.style.animation = 'none';
-        void fill.offsetWidth; // trigger reflow to reset keyframe animation
-        fill.style.animation = '';
-      }
-      activeBtn.classList.add('active');
-      activeBtn.setAttribute('aria-selected', 'true');
-      if (isPaused) {
-        activeBtn.classList.add('paused');
-      }
-    }
 
     resetTimer();
   }
@@ -85,7 +59,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function startTimer() {
-    if (isPaused) return;
     clearTimeout(slideTimer);
     slideTimer = setTimeout(() => {
       nextSlide();
@@ -97,90 +70,20 @@ document.addEventListener('DOMContentLoaded', () => {
     startTimer();
   }
 
-  function togglePlayPause() {
-    isPaused = !isPaused;
-    if (isPaused) {
-      clearTimeout(slideTimer);
-      if (pauseIcon) pauseIcon.classList.add('hidden');
-      if (playIcon) playIcon.classList.remove('hidden');
-      if (pauseBtn) {
-        pauseBtn.setAttribute('aria-label', 'Play autoplay');
-        pauseBtn.setAttribute('title', 'Play autoplay');
-      }
-      progressBtns[currentSlide]?.classList.add('paused');
-    } else {
-      if (pauseIcon) pauseIcon.classList.remove('hidden');
-      if (playIcon) playIcon.classList.add('hidden');
-      if (pauseBtn) {
-        pauseBtn.setAttribute('aria-label', 'Pause autoplay');
-        pauseBtn.setAttribute('title', 'Pause autoplay');
-      }
-      progressBtns[currentSlide]?.classList.remove('paused');
-      startTimer();
-    }
-  }
-
-  // Navigation button listeners
-  if (nextBtn) {
-    nextBtn.addEventListener('click', () => {
-      nextSlide();
-    });
-  }
-
-  if (prevBtn) {
-    prevBtn.addEventListener('click', () => {
-      prevSlide();
-    });
-  }
-
-  if (pauseBtn) {
-    pauseBtn.addEventListener('click', () => {
-      togglePlayPause();
-    });
-  }
-
-  // Progress Bar click navigation
-  progressBtns.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      const idx = parseInt(btn.getAttribute('data-index'), 10);
-      showSlide(idx);
-    });
-  });
-
-  // Pause on hover & keyboard focus
-  if (slider) {
-    slider.addEventListener('mouseenter', () => {
-      isHovered = true;
-      clearTimeout(slideTimer);
-    });
-
-    slider.addEventListener('mouseleave', () => {
-      isHovered = false;
-      startTimer();
-    });
-
-    slider.addEventListener('focusin', () => {
-      isFocused = true;
-      clearTimeout(slideTimer);
-    });
-
-    slider.addEventListener('focusout', () => {
-      isFocused = false;
-      startTimer();
-    });
-
     // Touch Swiping for mobile
     let touchStartX = 0;
     let touchEndX = 0;
 
-    slider.addEventListener('touchstart', (e) => {
-      touchStartX = e.changedTouches[0].screenX;
-    }, { passive: true });
+    if (slider) {
+      slider.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
 
-    slider.addEventListener('touchend', (e) => {
-      touchEndX = e.changedTouches[0].screenX;
-      handleSwipe();
-    }, { passive: true });
+      slider.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+      }, { passive: true });
+    }
 
     function handleSwipe() {
       const swipeDistance = touchEndX - touchStartX;
@@ -192,7 +95,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
     }
-  }
 
   // Pause when browser tab is hidden
   document.addEventListener('visibilitychange', () => {
@@ -445,9 +347,91 @@ document.addEventListener('DOMContentLoaded', () => {
   updateAboutParallax();
 
   /* ==========================================================================
-     5. SECTION ENTRANCE ANIMATION (IntersectionObserver - Animate Once)
+     5. SECTION ENTRANCE ANIMATION & CHAR-SPLIT HEADINGS (IntersectionObserver)
      ========================================================================== */
   const revealElements = document.querySelectorAll('.reveal-on-scroll');
+
+  // Character-by-character staggered heading entrance (WeFix animat-charsplit)
+  function initCharSplitHeadings() {
+    const headings = document.querySelectorAll('.animat-charsplit');
+    if (!headings.length) return;
+
+    headings.forEach(heading => {
+      // Save original for screen-reader accessibility
+      const rawText = heading.textContent.trim().replace(/\s+/g, ' ');
+      if (!heading.hasAttribute('aria-label')) {
+        heading.setAttribute('aria-label', rawText);
+      }
+
+      if (isReducedMotion) return;
+
+      let charIndex = 0;
+
+      function processTextToCharWords(text) {
+        const words = text.trim().split(/\s+/).filter(Boolean);
+        return words.map(word => {
+          const chars = word.split('').map(ch => {
+            const delay = (charIndex * 0.02).toFixed(2);
+            charIndex++;
+            return `<span class="wdt-title-char" style="animation-delay:${delay}s">${ch}</span>`;
+          }).join('');
+          return `<span class="wdt-title-word">${chars}</span>`;
+        }).join(' ');
+      }
+
+      function transformNode(node) {
+        if (node.nodeType === Node.TEXT_NODE) {
+          const text = node.textContent;
+          if (!text.trim()) {
+            return document.createTextNode(' ');
+          }
+          const frag = document.createDocumentFragment();
+          if (/^\s/.test(text)) {
+            frag.appendChild(document.createTextNode(' '));
+          }
+          const temp = document.createElement('span');
+          temp.innerHTML = processTextToCharWords(text);
+          while (temp.firstChild) {
+            frag.appendChild(temp.firstChild);
+          }
+          if (/\s$/.test(text)) {
+            frag.appendChild(document.createTextNode(' '));
+          }
+          return frag;
+        } else if (node.nodeType === Node.ELEMENT_NODE) {
+          if (node.tagName === 'BR') {
+            return node.cloneNode();
+          }
+          const clone = node.cloneNode(false);
+          Array.from(node.childNodes).forEach(child => {
+            const transformed = transformNode(child);
+            if (transformed) clone.appendChild(transformed);
+          });
+          return clone;
+        }
+        return null;
+      }
+
+      const fragment = document.createDocumentFragment();
+      Array.from(heading.childNodes).forEach(child => {
+        const transformed = transformNode(child);
+        if (transformed) fragment.appendChild(transformed);
+      });
+
+      heading.innerHTML = '';
+      heading.appendChild(fragment);
+    });
+
+    // Reveal hero heading on load
+    const heroTitle = document.getElementById('hero-title');
+    if (heroTitle) {
+      setTimeout(() => {
+        heroTitle.classList.add('is-revealed');
+      }, 100);
+    }
+  }
+
+  initCharSplitHeadings();
 
   // Animated numerical counters for stats in About section
   function animateCounters() {
