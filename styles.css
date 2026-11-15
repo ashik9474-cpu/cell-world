@@ -1112,22 +1112,7 @@ button {
   gap: 1.35rem;
 }
 
-@media (max-width: 768px) {
-  .slider-wrapper.hero-slider-display {
-    min-height: auto;
-    border-radius: 18px;
-  }
-  .hero-content.hero-overlay-box {
-    padding: 1.5rem 1.25rem 2.25rem;
-    max-width: 100%;
-  }
-  .slide-caption-pill {
-    top: 1rem;
-    right: 1rem;
-    font-size: 0.75rem;
-    padding: 0.35rem 0.75rem;
-  }
-}
+
 
 .hidden {
   display: none !important;
@@ -2433,21 +2418,47 @@ button {
    ========================================================================== */
 
 @media (max-width: 768px) {
+  /* Tightened overall hero section padding to reduce dead white space */
   .hero-section {
-    padding: 1.25rem 0.75rem 2rem !important;
+    padding: 0.75rem 0.65rem 0.75rem !important;
   }
 
-  /* 1. Hero Overlay Box: reduce empty space above badge */
+  /* 1. Remove black caption pill and text overlap on mobile */
+  .slide-caption-pill {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+
+  /* 2. Remove underline under 'Responsibility.' on mobile */
+  .accent-reveal::after {
+    display: none !important;
+    content: none !important;
+  }
+
+  /* 3. Hero Display Slider: full screen mobile view instead of a squarish box */
+  .slider-wrapper.hero-slider-display {
+    min-height: 80vh !important;
+    min-height: calc(100svh - 110px) !important;
+    border-radius: 20px !important;
+    align-items: stretch !important;
+  }
+
+  /* Content overlay: separates top headline from bottom action buttons */
   .hero-content.hero-overlay-box {
-    padding-top: 0.85rem !important;
-    padding-left: 0.85rem !important;
-    padding-right: 0.85rem !important;
-    padding-bottom: 1.5rem !important;
-    gap: 0.65rem !important;
+    min-height: 80vh !important;
+    min-height: calc(100svh - 110px) !important;
+    padding: 0.85rem 0.85rem 1.15rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    gap: 0.45rem !important;
     max-width: 100% !important;
+    box-sizing: border-box !important;
   }
 
-  /* 2. Location Badge: smaller, high up, single line */
+  /* Location Badge: smaller, high up, single line */
   .location-badge {
     font-size: 0.62rem !important;
     padding: 0.2rem 0.5rem !important;
@@ -2463,7 +2474,7 @@ button {
     height: 11px !important;
   }
 
-  /* 3. Headline directly below badge box */
+  /* Headline directly below badge box */
   .hero-headline {
     margin-top: 0 !important;
     margin-bottom: 0 !important;
@@ -2471,34 +2482,94 @@ button {
     line-height: 1.1 !important;
   }
 
-  /* Sliding images clearly visible behind the overlay text on mobile */
+  /* 4. Tagline: smaller font size, high contrast over sliding background images */
+  .hero-supporting {
+    font-size: 0.82rem !important;
+    line-height: 1.35 !important;
+    color: #0f172a !important;
+    font-weight: 600 !important;
+    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.95), 0 0 6px rgba(255, 255, 255, 0.9) !important;
+    max-width: 100% !important;
+    margin: 0.2rem 0 0 !important;
+  }
+
+  /* Scrim: leaves center open and transparent so sliding repair images are clearly visible */
   .hero-display-scrim {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.68) 0%, rgba(255, 255, 255, 0.45) 45%, rgba(255, 255, 255, 0.25) 75%, rgba(255, 255, 255, 0.48) 100%) !important;
+    background: linear-gradient(180deg, 
+      rgba(255, 255, 255, 0.88) 0%, 
+      rgba(255, 255, 255, 0.72) 26%, 
+      rgba(255, 255, 255, 0.18) 50%, 
+      rgba(255, 255, 255, 0.45) 82%, 
+      rgba(255, 255, 255, 0.88) 100%) !important;
   }
 
   .slide-img {
-    object-position: center 30% !important;
+    object-position: center center !important;
     opacity: 1 !important;
   }
 
-  /* 4. Action buttons: WhatsApp Us on the LEFT, Call Now on the RIGHT side by side */
+  /* 5. Specialist In Ticker: anchored to bottom, no text overflow outside pill */
+  .hero-sliding-ticker {
+    margin-top: auto !important;
+    margin-bottom: 0.35rem !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 0.35rem 0.65rem !important;
+    gap: 0.45rem !important;
+    background: rgba(255, 255, 255, 0.94) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    border: 1px solid rgba(203, 213, 225, 0.9) !important;
+    box-shadow: 0 3px 10px rgba(10, 17, 40, 0.08) !important;
+    border-radius: 9999px !important;
+    overflow: hidden !important;
+  }
+
+  .ticker-badge {
+    font-size: 0.62rem !important;
+    padding: 0.14rem 0.45rem !important;
+    letter-spacing: 0.03em !important;
+    flex-shrink: 0 !important;
+  }
+
+  .ticker-track-window {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    width: 0 !important;
+    overflow: hidden !important;
+    position: relative !important;
+    height: 1.3rem !important;
+  }
+
+  .ticker-slide {
+    font-size: 0.72rem !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    max-width: 100% !important;
+  }
+
+  /* 6. Action buttons: WhatsApp Us on the LEFT, Call Now on the RIGHT side by side */
   .hero-actions {
     display: flex !important;
     flex-direction: row !important;
     width: 100% !important;
     gap: 0.5rem !important;
     align-items: center !important;
+    margin-top: 0 !important;
   }
 
   .hero-actions .btn {
     flex: 1 !important;
     min-width: 0 !important;
     width: auto !important;
-    padding: 0.7rem 0.35rem !important;
-    font-size: 0.8rem !important;
+    padding: 0.72rem 0.35rem !important;
+    font-size: 0.82rem !important;
     justify-content: center !important;
     white-space: nowrap !important;
-    gap: 0.3rem !important;
+    gap: 0.35rem !important;
+    border-radius: 10px !important;
   }
 
   .hero-actions .btn .whatsapp-icon,
@@ -2512,12 +2583,35 @@ button {
     display: none !important;
   }
 
+  /* 7. Tightened Brands Section: removes excessive barren whitespace on mobile */
+  .brands-section {
+    padding: 1.25rem 1rem 1.25rem !important;
+  }
+
+  .brands-header {
+    margin: 0 auto 0.75rem !important;
+  }
+
+  .brands-heading {
+    font-size: 1.25rem !important;
+    margin-bottom: 0.2rem !important;
+  }
+
+  .brands-discreet-note {
+    font-size: 0.78rem !important;
+    margin-bottom: 0 !important;
+  }
+
+  .brands-marquee-container {
+    padding: 0.25rem 0 !important;
+  }
+
   .hero-stats-banner {
-    padding: 1rem 1.15rem;
+    padding: 0.85rem 1rem !important;
   }
 
   .services-section {
-    padding: 3.5rem 1rem;
+    padding: 1.5rem 1rem 2.25rem !important;
   }
 
   .service-row {
@@ -2525,10 +2619,10 @@ button {
   }
 
   .about-section {
-    padding: 3.5rem 1rem;
+    padding: 2.25rem 1rem;
   }
 
-  /* 5. About stats row: 3 horizontal columns (Left: 15+, Middle: 100%, Right: 10+) */
+  /* 8. About stats row: 3 horizontal columns (Left: 15+, Middle: 100%, Right: 10+) */
   .about-stats-row {
     display: grid !important;
     grid-template-columns: repeat(3, 1fr) !important;
@@ -2557,7 +2651,7 @@ button {
   }
 
   .contact-section {
-    padding: 3.5rem 1rem 5.5rem;
+    padding: 2.5rem 1rem 5.5rem;
   }
 
   .estimate-card, .details-section {
