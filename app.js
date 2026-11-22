@@ -166,28 +166,33 @@ document.addEventListener('DOMContentLoaded', () => {
   ];
 
   /* ==========================================================================
-     HERO SLIDING TEXT TICKER
+     HERO SLIDING TEXT TICKER (Supports both Desktop and Mobile containers)
      ========================================================================== */
-  const tickerSlides = document.querySelectorAll('#heroTicker .ticker-slide');
+  const tickerWindows = document.querySelectorAll('.ticker-track-window');
   let currentTicker = 0;
   let tickerTimer = null;
 
   function cycleTicker() {
-    if (tickerSlides.length <= 1 || isReducedMotion || document.hidden) return;
-    const prev = tickerSlides[currentTicker];
-    currentTicker = (currentTicker + 1) % tickerSlides.length;
-    const next = tickerSlides[currentTicker];
+    if (!tickerWindows.length || isReducedMotion || document.hidden) return;
+    tickerWindows.forEach(win => {
+      const slides = win.querySelectorAll('.ticker-slide');
+      if (slides.length <= 1) return;
+      const prev = slides[currentTicker % slides.length];
+      const nextIndex = (currentTicker + 1) % slides.length;
+      const next = slides[nextIndex];
 
-    prev.classList.remove('active');
-    prev.classList.add('exit');
-    setTimeout(() => {
-      prev.classList.remove('exit');
-    }, 450);
+      prev.classList.remove('active');
+      prev.classList.add('exit');
+      setTimeout(() => {
+        prev.classList.remove('exit');
+      }, 450);
 
-    next.classList.add('active');
+      next.classList.add('active');
+    });
+    currentTicker++;
   }
 
-  if (tickerSlides.length > 1 && !isReducedMotion) {
+  if (tickerWindows.length > 0 && !isReducedMotion) {
     tickerTimer = setInterval(cycleTicker, 3200);
   }
 
