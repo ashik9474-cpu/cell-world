@@ -1009,7 +1009,31 @@ button {
   }
 }
 
-/* Background Slider Track */
+/* Background Hero Video (Cinematic Slow-Motion Smartphone Repair) */
+.hero-video-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+  background-color: var(--color-navy-950);
+}
+
+.hero-bg-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Precision scale and focal shift: eliminates 86px top/bottom letterbox bars and pushes bottom-right watermark outside the container */
+  transform: translate(-50%, -50%) scale(1.36);
+  transform-origin: 35% 42%;
+  pointer-events: none;
+}
+
+/* Background Slider Track (Retained for legacy/fallback) */
 .slider-track {
   position: absolute;
   inset: 0;
@@ -2506,6 +2530,11 @@ button {
   .slide-img {
     object-position: center center !important;
     opacity: 1 !important;
+  }
+
+  .hero-bg-video {
+    transform: translate(-50%, -50%) scale(1.22) !important;
+    transform-origin: 45% 40% !important;
   }
 
   /* 5. Specialist In Ticker: anchored to bottom, no text overflow outside pill */

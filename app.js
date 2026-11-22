@@ -20,93 +20,43 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ==========================================================================
-     1. HERO IMAGE SLIDER (CONTINUOUS AUTO-SLIDE, NO BUTTONS)
+     1. HERO VIDEO BACKGROUND (CINEMATIC SLOW-MOTION SMARTPHONE REPAIR)
      ========================================================================== */
-  const slider = document.getElementById('heroSlider');
-  const sliderTrack = document.getElementById('sliderTrack');
-  const slides = document.querySelectorAll('.slide-item');
+  const heroVideo = document.getElementById('heroVideo');
+  if (heroVideo) {
+    // Set video to slow motion (65% speed for smooth, cinematic repair feel)
+    heroVideo.playbackRate = 0.65;
 
-  let currentSlide = 0;
-  let slideTimer = null;
-  const SLIDE_DURATION = 4000;
+    // Handle autoplay and ensure smooth play across all mobile and low-power modes
+    const attemptPlay = () => {
+      heroVideo.playbackRate = 0.65;
+      const playPromise = heroVideo.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          // Fallback: start video on first user interaction
+          const playOnUserAction = () => {
+            heroVideo.playbackRate = 0.65;
+            heroVideo.play();
+            document.removeEventListener('touchstart', playOnUserAction);
+            document.removeEventListener('click', playOnUserAction);
+          };
+          document.addEventListener('touchstart', playOnUserAction, { once: true, passive: true });
+          document.addEventListener('click', playOnUserAction, { once: true });
+        });
+      }
+    };
 
-  function showSlide(index) {
-    currentSlide = (index + slides.length) % slides.length;
+    attemptPlay();
 
-    // Horizontally slide the track one by one
-    if (sliderTrack) {
-      const offsetPercent = currentSlide * (100 / slides.length);
-      sliderTrack.style.transform = `translate3d(-${offsetPercent.toFixed(4)}%, 0, 0)`;
-    }
-
-    slides.forEach((slide, i) => {
-      if (i === currentSlide) {
-        slide.classList.add('active');
+    // Pause when tab is hidden, resume when tab is active
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        heroVideo.pause();
       } else {
-        slide.classList.remove('active');
+        attemptPlay();
       }
     });
-
-    resetTimer();
   }
-
-  function nextSlide() {
-    showSlide(currentSlide + 1);
-  }
-
-  function prevSlide() {
-    showSlide(currentSlide - 1);
-  }
-
-  function startTimer() {
-    clearTimeout(slideTimer);
-    slideTimer = setTimeout(() => {
-      nextSlide();
-    }, SLIDE_DURATION);
-  }
-
-  function resetTimer() {
-    clearTimeout(slideTimer);
-    startTimer();
-  }
-
-    // Touch Swiping for mobile
-    let touchStartX = 0;
-    let touchEndX = 0;
-
-    if (slider) {
-      slider.addEventListener('touchstart', (e) => {
-        touchStartX = e.changedTouches[0].screenX;
-      }, { passive: true });
-
-      slider.addEventListener('touchend', (e) => {
-        touchEndX = e.changedTouches[0].screenX;
-        handleSwipe();
-      }, { passive: true });
-    }
-
-    function handleSwipe() {
-      const swipeDistance = touchEndX - touchStartX;
-      if (Math.abs(swipeDistance) > 40) {
-        if (swipeDistance < 0) {
-          nextSlide(); // swipe left -> next
-        } else {
-          prevSlide(); // swipe right -> prev
-        }
-      }
-    }
-
-  // Pause when browser tab is hidden
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden) {
-      clearTimeout(slideTimer);
-    } else {
-      startTimer();
-    }
-  });
-
-  // Initialize slider timer
-  startTimer();
 
   /* ==========================================================================
      2. STICKY HEADER & MOBILE NAVIGATION DRAWER
