@@ -990,7 +990,87 @@ button {
   }
 }
 
-/* Arrax Display-Fitting Slider Wrapper */
+/* ==========================================================================
+   RAZORPAY-INSPIRED TWO-COLUMN HERO ARCHITECTURE (Zero-Fog Video Showcase)
+   ========================================================================== */
+.hero-section {
+  padding: 2.5rem 1.5rem 3.5rem;
+  background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+}
+
+.razor-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.08fr;
+  align-items: center;
+  gap: 3.5rem;
+  max-width: var(--container-max);
+  margin: 0 auto;
+}
+
+.hero-content-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.25rem;
+}
+
+.hero-visual-col {
+  position: relative;
+  width: 100%;
+}
+
+.hero-video-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10.5;
+  border-radius: 24px;
+  overflow: hidden;
+  background: var(--color-navy-950);
+  box-shadow: 0 24px 56px -12px rgba(10, 17, 40, 0.22), 0 0 0 1px rgba(10, 17, 40, 0.08);
+}
+
+.hero-showcase-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Precision crop: completely pushes the 86px letterbox bars and bottom-right Gemini watermark outside the frame */
+  transform: translate(-50%, -50%) scale(1.36);
+  transform-origin: 38% 42%;
+  pointer-events: none;
+}
+
+.video-floating-badge {
+  position: absolute;
+  top: 1.25rem;
+  left: 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(10, 17, 40, 0.78);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #ffffff;
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  z-index: 5;
+}
+
+.video-floating-badge .live-dot-pulse {
+  width: 8px;
+  height: 8px;
+  background-color: #22c55e;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.4);
+}
+
+/* Legacy Arrax Slider fallback */
 .slider-wrapper.hero-slider-display {
   position: relative;
   border-radius: 24px;
@@ -2444,7 +2524,41 @@ button {
 @media (max-width: 768px) {
   /* Tightened overall hero section padding to reduce dead white space */
   .hero-section {
-    padding: 0.75rem 0.65rem 0.75rem !important;
+    padding: 1rem 0.85rem 1.75rem !important;
+  }
+
+  /* Razorpay Mobile Stacking: Content on Top, Dedicated Video Below, Side-by-Side Action Buttons */
+  .razor-hero-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1.15rem !important;
+  }
+
+  .hero-content-col {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.65rem !important;
+    width: 100% !important;
+  }
+
+  .hero-visual-col {
+    width: 100% !important;
+    margin-top: 0.25rem !important;
+  }
+
+  .hero-video-frame {
+    width: 100% !important;
+    aspect-ratio: 16 / 10 !important;
+    border-radius: 18px !important;
+    box-shadow: 0 12px 30px -8px rgba(10, 17, 40, 0.16) !important;
+    position: relative !important;
+    overflow: hidden !important;
+  }
+
+  .hero-showcase-video {
+    transform: translate(-50%, -50%) scale(1.34) !important;
+    transform-origin: 40% 40% !important;
   }
 
   /* 1. Remove black caption pill and text overlap on mobile */
@@ -2459,27 +2573,6 @@ button {
   .accent-reveal::after {
     display: none !important;
     content: none !important;
-  }
-
-  /* 3. Hero Display Slider: full screen mobile view instead of a squarish box */
-  .slider-wrapper.hero-slider-display {
-    min-height: 80vh !important;
-    min-height: calc(100svh - 110px) !important;
-    border-radius: 20px !important;
-    align-items: stretch !important;
-  }
-
-  /* Content overlay: separates top headline from bottom action buttons */
-  .hero-content.hero-overlay-box {
-    min-height: 80vh !important;
-    min-height: calc(100svh - 110px) !important;
-    padding: 0.85rem 0.85rem 1.15rem !important;
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: flex-start !important;
-    gap: 0.45rem !important;
-    max-width: 100% !important;
-    box-sizing: border-box !important;
   }
 
   /* Location Badge: smaller, high up, single line */
@@ -2506,49 +2599,26 @@ button {
     line-height: 1.1 !important;
   }
 
-  /* 4. Tagline: smaller font size, high contrast over sliding background images */
+  /* 4. Tagline: smaller font size, high contrast */
   .hero-supporting {
-    font-size: 0.82rem !important;
-    line-height: 1.35 !important;
-    color: #0f172a !important;
-    font-weight: 600 !important;
-    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.95), 0 0 6px rgba(255, 255, 255, 0.9) !important;
+    font-size: 0.85rem !important;
+    line-height: 1.4 !important;
+    color: var(--color-slate-600) !important;
+    font-weight: 500 !important;
     max-width: 100% !important;
-    margin: 0.2rem 0 0 !important;
+    margin: 0 !important;
   }
 
-  /* Scrim: leaves center open and transparent so sliding repair images are clearly visible */
-  .hero-display-scrim {
-    background: linear-gradient(180deg, 
-      rgba(255, 255, 255, 0.88) 0%, 
-      rgba(255, 255, 255, 0.72) 26%, 
-      rgba(255, 255, 255, 0.18) 50%, 
-      rgba(255, 255, 255, 0.45) 82%, 
-      rgba(255, 255, 255, 0.88) 100%) !important;
-  }
-
-  .slide-img {
-    object-position: center center !important;
-    opacity: 1 !important;
-  }
-
-  .hero-bg-video {
-    transform: translate(-50%, -50%) scale(1.22) !important;
-    transform-origin: 45% 40% !important;
-  }
-
-  /* 5. Specialist In Ticker: anchored to bottom, no text overflow outside pill */
+  /* 5. Specialist In Ticker: anchored cleanly with no overflow */
   .hero-sliding-ticker {
-    margin-top: auto !important;
-    margin-bottom: 0.35rem !important;
+    margin-top: 0.2rem !important;
+    margin-bottom: 0 !important;
     width: 100% !important;
     max-width: 100% !important;
     box-sizing: border-box !important;
     padding: 0.35rem 0.65rem !important;
     gap: 0.45rem !important;
     background: rgba(255, 255, 255, 0.94) !important;
-    backdrop-filter: blur(8px) !important;
-    -webkit-backdrop-filter: blur(8px) !important;
     border: 1px solid rgba(203, 213, 225, 0.9) !important;
     box-shadow: 0 3px 10px rgba(10, 17, 40, 0.08) !important;
     border-radius: 9999px !important;
@@ -2586,7 +2656,7 @@ button {
     width: 100% !important;
     gap: 0.5rem !important;
     align-items: center !important;
-    margin-top: 0 !important;
+    margin-top: 0.35rem !important;
   }
 
   .hero-actions .btn {
