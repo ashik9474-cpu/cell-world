@@ -22,38 +22,41 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ==========================================================================
      1. HERO VIDEO BACKGROUND (CINEMATIC SLOW-MOTION SMARTPHONE REPAIR)
      ========================================================================== */
-  const heroVideo = document.getElementById('heroVideo');
-  if (heroVideo) {
-    // Set video to slow motion (65% speed for smooth, cinematic repair feel)
-    heroVideo.playbackRate = 0.65;
+  const heroVideos = document.querySelectorAll('.hero-showcase-video, .mockup-video');
+  if (heroVideos.length > 0) {
+    heroVideos.forEach(vid => {
+      vid.playbackRate = 0.65;
+    });
 
-    // Handle autoplay and ensure smooth play across all mobile and low-power modes
-    const attemptPlay = () => {
-      heroVideo.playbackRate = 0.65;
-      const playPromise = heroVideo.play();
-      if (playPromise !== undefined) {
-        playPromise.catch(() => {
-          // Fallback: start video on first user interaction
-          const playOnUserAction = () => {
-            heroVideo.playbackRate = 0.65;
-            heroVideo.play();
-            document.removeEventListener('touchstart', playOnUserAction);
-            document.removeEventListener('click', playOnUserAction);
-          };
-          document.addEventListener('touchstart', playOnUserAction, { once: true, passive: true });
-          document.addEventListener('click', playOnUserAction, { once: true });
-        });
-      }
+    const attemptPlayAll = () => {
+      heroVideos.forEach(vid => {
+        vid.playbackRate = 0.65;
+        const playPromise = vid.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(() => {
+            const playOnUserAction = () => {
+              heroVideos.forEach(v => {
+                v.playbackRate = 0.65;
+                v.play();
+              });
+              document.removeEventListener('touchstart', playOnUserAction);
+              document.removeEventListener('click', playOnUserAction);
+            };
+            document.addEventListener('touchstart', playOnUserAction, { once: true, passive: true });
+            document.addEventListener('click', playOnUserAction, { once: true });
+          });
+        }
+      });
     };
 
-    attemptPlay();
+    attemptPlayAll();
 
     // Pause when tab is hidden, resume when tab is active
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) {
-        heroVideo.pause();
+        heroVideos.forEach(vid => vid.pause());
       } else {
-        attemptPlay();
+        attemptPlayAll();
       }
     });
   }

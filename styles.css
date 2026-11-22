@@ -1025,8 +1025,9 @@ button {
   display: none;
 }
 
-/* Floating Tech Chips (Hidden on desktop to preserve desktop layout 100%) */
-.floating-tech-chip {
+/* Floating Tech Chips & Phone Mockup (Hidden on desktop to preserve desktop layout 100%) */
+.floating-tech-chip,
+.phone-mockup-wrapper {
   display: none;
 }
 
@@ -2538,23 +2539,28 @@ button {
    ========================================================================== */
 
 @media (max-width: 768px) {
-  /* Tightened overall hero section padding to reduce dead white space */
+  /* Option 2: Vibrant Studio Lighting Gradient on Mobile */
   .hero-section {
-    padding: 1rem 0.85rem 1.75rem !important;
+    padding: 1.1rem 0.85rem 1.85rem !important;
+    background: radial-gradient(circle at 50% 24%, rgba(219, 234, 254, 0.75) 0%, #f8fafc 48%, #ffffff 100%) !important;
+    position: relative !important;
+    overflow: hidden !important;
   }
 
-  /* Razorpay Mobile Stacking: Content on Top, Dedicated Video Below, Side-by-Side Action Buttons */
+  /* Centered Symmetrical Hardware Flow */
   .razor-hero-grid {
     display: flex !important;
     flex-direction: column !important;
+    align-items: center !important;
     gap: 0.85rem !important;
   }
 
   .hero-content-col {
     display: flex !important;
     flex-direction: column !important;
-    align-items: flex-start !important;
-    gap: 0.65rem !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 0.45rem !important;
     width: 100% !important;
   }
 
@@ -2563,98 +2569,248 @@ button {
     display: none !important;
   }
 
-  .hero-visual-col {
-    width: 100% !important;
-    margin-top: 0.15rem !important;
-  }
-
+  /* Hide desktop video frame on mobile */
   .hero-video-frame {
-    width: 100% !important;
-    aspect-ratio: 16 / 10 !important;
-    border-radius: 18px !important;
-    box-shadow: 0 16px 36px -10px rgba(10, 17, 40, 0.22), 0 0 0 1px rgba(37, 99, 235, 0.12) !important;
-    position: relative !important;
-    overflow: hidden !important;
-  }
-
-  .hero-showcase-video {
-    transform: translate(-50%, -50%) scale(1.34) !important;
-    transform-origin: 40% 40% !important;
-  }
-
-  .video-floating-badge {
     display: none !important;
   }
 
-  /* Floating Tech Badges (Option 1 - Razorpay Mobile Showcase) */
-  .floating-tech-chip {
-    position: absolute !important;
-    z-index: 5 !important;
-    display: inline-flex !important;
+  /* ====================================================
+     OPTION 2: SMARTPHONE DEVICE MOCKUP (Phone Inside Phone)
+     ==================================================== */
+  .hero-visual-col {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
     align-items: center !important;
-    gap: 0.55rem !important;
-    background: rgba(255, 255, 255, 0.95) !important;
-    backdrop-filter: blur(12px) !important;
-    -webkit-backdrop-filter: blur(12px) !important;
-    padding: 0.38rem 0.75rem !important;
-    border-radius: 12px !important;
-    box-shadow: 0 8px 24px -4px rgba(10, 17, 40, 0.28), 0 0 0 1px rgba(255, 255, 255, 0.8) !important;
-    animation: floatChip 4s ease-in-out infinite alternate !important;
+    position: relative !important;
+    padding: 0.85rem 0 !important;
+    margin: 0 !important;
   }
 
-  .chip-top-left {
-    top: 0.75rem !important;
-    left: 0.75rem !important;
+  .phone-mockup-wrapper {
+    position: relative !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
   }
 
-  .chip-bottom-right {
-    bottom: 0.75rem !important;
-    right: 0.75rem !important;
+  /* Ambient Backlight Aura */
+  .device-ambient-glow {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 280px !important;
+    height: 320px !important;
+    background: radial-gradient(circle, rgba(37, 99, 235, 0.28) 0%, rgba(59, 130, 246, 0.14) 45%, transparent 70%) !important;
+    filter: blur(28px) !important;
+    pointer-events: none !important;
+    z-index: 1 !important;
+  }
+
+  /* Titanium Smartphone Chassis */
+  .phone-device-mockup {
+    position: relative !important;
+    z-index: 2 !important;
+    width: 215px !important;
+    height: 310px !important;
+    background: #0b0f19 !important;
+    border-radius: 40px !important;
+    border: 6px solid #1e293b !important;
+    box-shadow: 
+      0 0 0 1px rgba(255, 255, 255, 0.25),
+      0 0 0 3px #0f172a,
+      0 24px 50px -10px rgba(15, 23, 42, 0.45),
+      0 0 40px rgba(37, 99, 235, 0.25) !important;
+    overflow: hidden !important;
+  }
+
+  /* Dynamic Island Capsule */
+  .mockup-dynamic-island {
+    position: absolute !important;
+    top: 8px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: 65px !important;
+    height: 15px !important;
+    background: #000000 !important;
+    border-radius: 20px !important;
+    z-index: 10 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 0 7px !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+  }
+
+  .dynamic-island-cam {
+    width: 5px !important;
+    height: 5px !important;
+    background: #1e293b !important;
+    border-radius: 50% !important;
+    box-shadow: inset 0 0 2px #38bdf8 !important;
+  }
+
+  .dynamic-island-mic {
+    width: 4px !important;
+    height: 4px !important;
+    background: #22c55e !important;
+    border-radius: 50% !important;
+    box-shadow: 0 0 4px #22c55e !important;
+  }
+
+  /* Glass Screen Canvas */
+  .mockup-screen {
+    position: relative !important;
+    width: 100% !important;
+    height: 100% !important;
+    overflow: hidden !important;
+    background: #000000 !important;
+  }
+
+  .mockup-video {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    transform: translate(-50%, -50%) scale(1.65) !important;
+    transform-origin: 40% 48% !important;
+    pointer-events: none !important;
+  }
+
+  /* High-Tech Laser Scanning Beam */
+  .mockup-laser-scanner {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 2px !important;
+    background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.95), transparent) !important;
+    box-shadow: 0 0 12px 2px rgba(56, 189, 248, 0.85) !important;
+    animation: laserScan 3.5s cubic-bezier(0.4, 0, 0.2, 1) infinite !important;
+    z-index: 4 !important;
+    pointer-events: none !important;
+  }
+
+  @keyframes laserScan {
+    0% { top: 0%; opacity: 0; }
+    15% { opacity: 1; }
+    85% { opacity: 1; }
+    100% { top: 100%; opacity: 0; }
+  }
+
+  /* Glass Glare Reflection */
+  .mockup-screen-glare {
+    position: absolute !important;
+    inset: 0 !important;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.04) 30%, transparent 60%) !important;
+    pointer-events: none !important;
+    z-index: 5 !important;
+  }
+
+  /* Diagnostic HUD Tag */
+  .mockup-hud-tag {
+    position: absolute !important;
+    bottom: 8px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    z-index: 8 !important;
+    background: rgba(15, 23, 42, 0.8) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    color: #38bdf8 !important;
+    font-size: 0.55rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.06em !important;
+    text-transform: uppercase !important;
+    padding: 0.2rem 0.5rem !important;
+    border-radius: 6px !important;
+    border: 1px solid rgba(56, 189, 248, 0.3) !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.35rem !important;
+    white-space: nowrap !important;
+  }
+
+  .mockup-hud-dot {
+    width: 5px !important;
+    height: 5px !important;
+    background: #22c55e !important;
+    border-radius: 50% !important;
+    animation: pulseDot 1.5s infinite !important;
+  }
+
+  @keyframes pulseDot {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  /* 3D Overlapping Badges flanking the phone (Razorpay Card Architecture) */
+  .mockup-floating-badge {
+    position: absolute !important;
+    z-index: 12 !important;
+    padding: 0.42rem 0.68rem !important;
+    border-radius: 14px !important;
+    box-shadow: 0 10px 25px -4px rgba(10, 17, 40, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.9) !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.45rem !important;
+    animation: floatCard 4s ease-in-out infinite alternate !important;
+  }
+
+  .badge-express {
+    top: 25px !important;
+    left: 12px !important;
+    background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%) !important;
+    border: 1px solid rgba(34, 197, 94, 0.3) !important;
+  }
+
+  .badge-lab {
+    bottom: 25px !important;
+    right: 12px !important;
+    background: linear-gradient(135deg, #ffffff 0%, #eff6ff 100%) !important;
+    border: 1px solid rgba(37, 99, 235, 0.3) !important;
     animation-delay: -2s !important;
   }
 
-  .chip-icon-zap {
-    font-size: 1.05rem !important;
-    line-height: 1 !important;
-    filter: drop-shadow(0 2px 4px rgba(245, 158, 11, 0.4)) !important;
-  }
-
-  .chip-icon-micro {
-    font-size: 1.05rem !important;
+  .mockup-floating-badge .badge-icon {
+    font-size: 1.1rem !important;
     line-height: 1 !important;
   }
 
-  .chip-text {
+  .mockup-floating-badge .badge-meta {
     display: flex !important;
     flex-direction: column !important;
     line-height: 1.15 !important;
   }
 
-  .chip-text strong {
+  .mockup-floating-badge .badge-meta strong {
     font-size: 0.7rem !important;
     font-weight: 800 !important;
     color: #0f172a !important;
-    letter-spacing: -0.01em !important;
   }
 
-  .chip-text span {
-    font-size: 0.58rem !important;
+  .mockup-floating-badge .badge-meta span {
+    font-size: 0.56rem !important;
     font-weight: 600 !important;
     color: #64748b !important;
   }
 
-  @keyframes floatChip {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-4px); }
+  @keyframes floatCard {
+    0% { transform: translateY(0) scale(1); }
+    100% { transform: translateY(-4px) scale(1.02); }
   }
 
-  /* Mobile Flow below video */
+  /* Mobile Flow below phone */
   .hero-mobile-flow {
     display: flex !important;
     flex-direction: column !important;
     gap: 0.65rem !important;
     width: 100% !important;
-    margin-top: 0.35rem !important;
+    margin-top: 0.2rem !important;
   }
 
   /* 1. Remove black caption pill and text overlap on mobile */
