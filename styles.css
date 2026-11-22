@@ -1025,9 +1025,10 @@ button {
   display: none;
 }
 
-/* Floating Tech Chips & Phone Mockup (Hidden on desktop to preserve desktop layout 100%) */
+/* Badges & Mobile Elements (Hidden on desktop to preserve desktop layout 100%) */
 .floating-tech-chip,
-.phone-mockup-wrapper {
+.phone-mockup-wrapper,
+.video-corner-badge {
   display: none;
 }
 
@@ -2539,20 +2540,39 @@ button {
    ========================================================================== */
 
 @media (max-width: 768px) {
-  /* Option 2: Vibrant Studio Lighting Gradient on Mobile */
+  /* ====================================================
+     OPTION 3: FULL-BLEED CINEMATIC DARK MODE (MOBILE ONLY)
+     ==================================================== */
   .hero-section {
-    padding: 1.1rem 0.85rem 1.85rem !important;
-    background: radial-gradient(circle at 50% 24%, rgba(219, 234, 254, 0.75) 0%, #f8fafc 48%, #ffffff 100%) !important;
+    padding: 1.25rem 0.85rem 1.75rem !important;
+    background: radial-gradient(circle at 50% 0%, #0f172a 0%, #070a13 65%, #030712 100%) !important;
     position: relative !important;
     overflow: hidden !important;
   }
 
-  /* Centered Symmetrical Hardware Flow */
+  /* Subtle Ambient Blue Lighting Aura */
+  .hero-section::before {
+    content: '';
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 320px;
+    height: 180px;
+    background: radial-gradient(circle, rgba(37, 99, 235, 0.3) 0%, transparent 70%);
+    filter: blur(40px);
+    pointer-events: none;
+  }
+
+  /* Symmetrical Clean Grid Layout */
   .razor-hero-grid {
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
-    gap: 0.85rem !important;
+    gap: 0.95rem !important;
+    width: 100% !important;
+    position: relative !important;
+    z-index: 2 !important;
   }
 
   .hero-content-col {
@@ -2560,326 +2580,210 @@ button {
     flex-direction: column !important;
     align-items: center !important;
     text-align: center !important;
-    gap: 0.45rem !important;
+    gap: 0.5rem !important;
     width: 100% !important;
   }
 
-  /* Desktop flow hidden on mobile */
-  .hero-desktop-flow {
+  /* Desktop flow and unused elements hidden on mobile */
+  .hero-desktop-flow,
+  .phone-mockup-wrapper,
+  .floating-tech-chip {
     display: none !important;
   }
 
-  /* Hide desktop video frame on mobile */
-  .hero-video-frame {
-    display: none !important;
+  /* 1. Glassmorphic Location Pill */
+  .location-badge {
+    font-size: 0.65rem !important;
+    padding: 0.26rem 0.65rem !important;
+    gap: 0.35rem !important;
+    background: rgba(15, 23, 42, 0.85) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border: 1px solid rgba(56, 189, 248, 0.4) !important;
+    color: #38bdf8 !important;
+    border-radius: 9999px !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4) !important;
+    margin: 0 auto !important;
+    white-space: nowrap !important;
+    letter-spacing: 0.04em !important;
   }
 
-  /* ====================================================
-     OPTION 2: SMARTPHONE DEVICE MOCKUP (Phone Inside Phone)
-     ==================================================== */
+  .location-badge .ui-icon-sm {
+    width: 12px !important;
+    height: 12px !important;
+  }
+
+  .location-badge .live-dot-pulse {
+    width: 7px !important;
+    height: 7px !important;
+    background-color: #38bdf8 !important;
+    box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.4) !important;
+  }
+
+  /* 2. Headline: Crisp White & Electric Cyan/Blue Gradient */
+  .hero-headline {
+    margin: 0.1rem 0 0 !important;
+    font-size: clamp(2rem, 7.5vw, 2.45rem) !important;
+    line-height: 1.1 !important;
+    text-align: center !important;
+    color: #ffffff !important;
+    letter-spacing: -0.02em !important;
+  }
+
+  .hero-headline .hero-line {
+    color: #ffffff !important;
+  }
+
+  .hero-headline .accent-reveal {
+    background: linear-gradient(135deg, #38bdf8 0%, #60a5fa 50%, #93c5fd 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    filter: drop-shadow(0 2px 10px rgba(56, 189, 248, 0.45)) !important;
+  }
+
+  .accent-reveal::after {
+    display: none !important;
+    content: none !important;
+  }
+
+  /* 3. Supporting Tagline: High Readability Silver */
+  .hero-supporting {
+    font-size: 0.85rem !important;
+    line-height: 1.45 !important;
+    color: #94a3b8 !important;
+    text-align: center !important;
+    max-width: 325px !important;
+    margin: 0 auto !important;
+  }
+
+  /* 4. Full-Bleed Widescreen Cinematic Video Canvas */
   .hero-visual-col {
     width: 100% !important;
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
+    margin: 0.15rem 0 !important;
     position: relative !important;
-    padding: 0.85rem 0 !important;
-    margin: 0 !important;
   }
 
-  .phone-mockup-wrapper {
-    position: relative !important;
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
+  .hero-video-frame {
+    display: block !important;
     width: 100% !important;
-  }
-
-  /* Ambient Backlight Aura */
-  .device-ambient-glow {
-    position: absolute !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    width: 280px !important;
-    height: 320px !important;
-    background: radial-gradient(circle, rgba(37, 99, 235, 0.28) 0%, rgba(59, 130, 246, 0.14) 45%, transparent 70%) !important;
-    filter: blur(28px) !important;
-    pointer-events: none !important;
-    z-index: 1 !important;
-  }
-
-  /* Titanium Smartphone Chassis */
-  .phone-device-mockup {
+    aspect-ratio: 16 / 10 !important;
+    border-radius: 18px !important;
+    overflow: hidden !important;
     position: relative !important;
-    z-index: 2 !important;
-    width: 215px !important;
-    height: 310px !important;
-    background: #0b0f19 !important;
-    border-radius: 40px !important;
-    border: 6px solid #1e293b !important;
+    background: #000000 !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
     box-shadow: 
-      0 0 0 1px rgba(255, 255, 255, 0.25),
-      0 0 0 3px #0f172a,
-      0 24px 50px -10px rgba(15, 23, 42, 0.45),
-      0 0 40px rgba(37, 99, 235, 0.25) !important;
-    overflow: hidden !important;
+      0 16px 36px -10px rgba(0, 0, 0, 0.7),
+      0 0 30px rgba(37, 99, 235, 0.25) !important;
   }
 
-  /* Dynamic Island Capsule */
-  .mockup-dynamic-island {
-    position: absolute !important;
-    top: 8px !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-    width: 65px !important;
-    height: 15px !important;
-    background: #000000 !important;
-    border-radius: 20px !important;
-    z-index: 10 !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-    padding: 0 7px !important;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important;
-  }
-
-  .dynamic-island-cam {
-    width: 5px !important;
-    height: 5px !important;
-    background: #1e293b !important;
-    border-radius: 50% !important;
-    box-shadow: inset 0 0 2px #38bdf8 !important;
-  }
-
-  .dynamic-island-mic {
-    width: 4px !important;
-    height: 4px !important;
-    background: #22c55e !important;
-    border-radius: 50% !important;
-    box-shadow: 0 0 4px #22c55e !important;
-  }
-
-  /* Glass Screen Canvas */
-  .mockup-screen {
-    position: relative !important;
-    width: 100% !important;
-    height: 100% !important;
-    overflow: hidden !important;
-    background: #000000 !important;
-  }
-
-  .mockup-video {
+  .hero-showcase-video {
     position: absolute !important;
     top: 50% !important;
     left: 50% !important;
     width: 100% !important;
     height: 100% !important;
     object-fit: cover !important;
-    transform: translate(-50%, -50%) scale(1.65) !important;
-    transform-origin: 40% 48% !important;
-    pointer-events: none !important;
+    transform: translate(-50%, -50%) scale(1.36) !important;
+    transform-origin: 38% 42% !important;
+    opacity: 0.95 !important;
   }
 
-  /* High-Tech Laser Scanning Beam */
-  .mockup-laser-scanner {
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    height: 2px !important;
-    background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.95), transparent) !important;
-    box-shadow: 0 0 12px 2px rgba(56, 189, 248, 0.85) !important;
-    animation: laserScan 3.5s cubic-bezier(0.4, 0, 0.2, 1) infinite !important;
-    z-index: 4 !important;
-    pointer-events: none !important;
-  }
-
-  @keyframes laserScan {
-    0% { top: 0%; opacity: 0; }
-    15% { opacity: 1; }
-    85% { opacity: 1; }
-    100% { top: 100%; opacity: 0; }
-  }
-
-  /* Glass Glare Reflection */
-  .mockup-screen-glare {
+  /* Subtle Film Glare Sheen */
+  .hero-video-frame::after {
+    content: '' !important;
     position: absolute !important;
     inset: 0 !important;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.04) 30%, transparent 60%) !important;
+    background: linear-gradient(
+      180deg, 
+      rgba(15, 23, 42, 0.35) 0%, 
+      transparent 40%, 
+      rgba(3, 7, 18, 0.6) 100%
+    ) !important;
     pointer-events: none !important;
+    z-index: 2 !important;
+  }
+
+  /* Video Floating Badges */
+  .video-floating-badge {
+    position: absolute !important;
+    top: 0.85rem !important;
+    left: 0.85rem !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.45rem !important;
+    background: rgba(10, 15, 29, 0.75) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    color: #ffffff !important;
+    padding: 0.3rem 0.65rem !important;
+    border-radius: 9999px !important;
+    font-size: 0.68rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.04em !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
     z-index: 5 !important;
   }
 
-  /* Diagnostic HUD Tag */
-  .mockup-hud-tag {
+  .video-floating-badge .live-dot-pulse {
+    width: 7px !important;
+    height: 7px !important;
+    background-color: #22c55e !important;
+  }
+
+  .video-corner-badge {
     position: absolute !important;
-    bottom: 8px !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-    z-index: 8 !important;
-    background: rgba(15, 23, 42, 0.8) !important;
-    backdrop-filter: blur(8px) !important;
-    -webkit-backdrop-filter: blur(8px) !important;
+    bottom: 0.75rem !important;
+    right: 0.75rem !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.4rem !important;
+    background: rgba(15, 23, 42, 0.82) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
     color: #38bdf8 !important;
-    font-size: 0.55rem !important;
+    padding: 0.28rem 0.6rem !important;
+    border-radius: 8px !important;
+    font-size: 0.62rem !important;
     font-weight: 700 !important;
-    letter-spacing: 0.06em !important;
+    letter-spacing: 0.05em !important;
     text-transform: uppercase !important;
-    padding: 0.2rem 0.5rem !important;
-    border-radius: 6px !important;
-    border: 1px solid rgba(56, 189, 248, 0.3) !important;
-    display: flex !important;
-    align-items: center !important;
-    gap: 0.35rem !important;
-    white-space: nowrap !important;
+    border: 1px solid rgba(56, 189, 248, 0.35) !important;
+    z-index: 5 !important;
   }
 
-  .mockup-hud-dot {
-    width: 5px !important;
-    height: 5px !important;
-    background: #22c55e !important;
-    border-radius: 50% !important;
-    animation: pulseDot 1.5s infinite !important;
-  }
-
-  @keyframes pulseDot {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
-  }
-
-  /* 3D Overlapping Badges flanking the phone (Razorpay Card Architecture) */
-  .mockup-floating-badge {
-    position: absolute !important;
-    z-index: 12 !important;
-    padding: 0.42rem 0.68rem !important;
-    border-radius: 14px !important;
-    box-shadow: 0 10px 25px -4px rgba(10, 17, 40, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.9) !important;
-    display: flex !important;
-    align-items: center !important;
-    gap: 0.45rem !important;
-    animation: floatCard 4s ease-in-out infinite alternate !important;
-  }
-
-  .badge-express {
-    top: 25px !important;
-    left: 12px !important;
-    background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%) !important;
-    border: 1px solid rgba(34, 197, 94, 0.3) !important;
-  }
-
-  .badge-lab {
-    bottom: 25px !important;
-    right: 12px !important;
-    background: linear-gradient(135deg, #ffffff 0%, #eff6ff 100%) !important;
-    border: 1px solid rgba(37, 99, 235, 0.3) !important;
-    animation-delay: -2s !important;
-  }
-
-  .mockup-floating-badge .badge-icon {
-    font-size: 1.1rem !important;
-    line-height: 1 !important;
-  }
-
-  .mockup-floating-badge .badge-meta {
-    display: flex !important;
-    flex-direction: column !important;
-    line-height: 1.15 !important;
-  }
-
-  .mockup-floating-badge .badge-meta strong {
-    font-size: 0.7rem !important;
-    font-weight: 800 !important;
-    color: #0f172a !important;
-  }
-
-  .mockup-floating-badge .badge-meta span {
-    font-size: 0.56rem !important;
-    font-weight: 600 !important;
-    color: #64748b !important;
-  }
-
-  @keyframes floatCard {
-    0% { transform: translateY(0) scale(1); }
-    100% { transform: translateY(-4px) scale(1.02); }
-  }
-
-  /* Mobile Flow below phone */
+  /* 5. Mobile Flow: Ticker & Actions */
   .hero-mobile-flow {
     display: flex !important;
     flex-direction: column !important;
     gap: 0.65rem !important;
     width: 100% !important;
-    margin-top: 0.2rem !important;
+    margin-top: 0.15rem !important;
   }
 
-  /* 1. Remove black caption pill and text overlap on mobile */
-  .slide-caption-pill {
-    display: none !important;
-    opacity: 0 !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
-  }
-
-  /* 2. Remove underline under 'Responsibility.' on mobile */
-  .accent-reveal::after {
-    display: none !important;
-    content: none !important;
-  }
-
-  /* Location Badge: smaller, high up, single line */
-  .location-badge {
-    font-size: 0.62rem !important;
-    padding: 0.2rem 0.5rem !important;
-    gap: 0.3rem !important;
-    white-space: nowrap !important;
-    align-self: flex-start !important;
-    margin-bottom: 0 !important;
-    letter-spacing: 0.04em !important;
-  }
-
-  .location-badge .ui-icon-sm {
-    width: 11px !important;
-    height: 11px !important;
-  }
-
-  /* Headline directly below badge box */
-  .hero-headline {
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-    font-size: clamp(1.85rem, 7vw, 2.35rem) !important;
-    line-height: 1.1 !important;
-  }
-
-  /* 4. Tagline: smaller font size, high contrast */
-  .hero-supporting {
-    font-size: 0.85rem !important;
-    line-height: 1.4 !important;
-    color: var(--color-slate-600) !important;
-    font-weight: 500 !important;
-    max-width: 100% !important;
-    margin: 0 !important;
-  }
-
-  /* 5. Specialist In Ticker: anchored cleanly with no overflow */
+  /* Dark Frosted Specialist In Ticker */
   .hero-sliding-ticker {
-    margin-top: 0.2rem !important;
-    margin-bottom: 0 !important;
     width: 100% !important;
     max-width: 100% !important;
     box-sizing: border-box !important;
-    padding: 0.35rem 0.65rem !important;
-    gap: 0.45rem !important;
-    background: rgba(255, 255, 255, 0.94) !important;
-    border: 1px solid rgba(203, 213, 225, 0.9) !important;
-    box-shadow: 0 3px 10px rgba(10, 17, 40, 0.08) !important;
+    background: rgba(15, 23, 42, 0.85) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.14) !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4) !important;
+    padding: 0.4rem 0.75rem !important;
     border-radius: 9999px !important;
+    margin: 0 !important;
     overflow: hidden !important;
+    gap: 0.45rem !important;
   }
 
   .ticker-badge {
+    background: rgba(37, 99, 235, 0.3) !important;
+    color: #38bdf8 !important;
+    border: 1px solid rgba(56, 189, 248, 0.35) !important;
+    padding: 0.16rem 0.48rem !important;
     font-size: 0.62rem !important;
-    padding: 0.14rem 0.45rem !important;
     letter-spacing: 0.03em !important;
     flex-shrink: 0 !important;
   }
@@ -2894,44 +2798,70 @@ button {
   }
 
   .ticker-slide {
-    font-size: 0.72rem !important;
+    color: #f8fafc !important;
+    font-size: 0.74rem !important;
+    font-weight: 600 !important;
     white-space: nowrap !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
     max-width: 100% !important;
   }
 
-  /* 6. Action buttons: WhatsApp Us on the LEFT, Call Now on the RIGHT side by side */
-  .hero-actions {
+  /* 6. Side-by-Side CTA Buttons */
+  .hero-actions.mobile-actions {
     display: flex !important;
     flex-direction: row !important;
     width: 100% !important;
-    gap: 0.5rem !important;
+    gap: 0.65rem !important;
     align-items: center !important;
-    margin-top: 0.35rem !important;
+    margin-top: 0.1rem !important;
   }
 
-  .hero-actions .btn {
+  .hero-actions.mobile-actions .btn {
     flex: 1 !important;
     min-width: 0 !important;
     width: auto !important;
-    padding: 0.72rem 0.35rem !important;
-    font-size: 0.82rem !important;
+    padding: 0.82rem 0.5rem !important;
+    font-size: 0.88rem !important;
+    font-weight: 700 !important;
+    border-radius: 12px !important;
     justify-content: center !important;
     white-space: nowrap !important;
     gap: 0.35rem !important;
-    border-radius: 10px !important;
   }
 
-  .hero-actions .btn .whatsapp-icon,
-  .hero-actions .btn .ui-icon {
-    width: 15px !important;
-    height: 15px !important;
+  .hero-actions.mobile-actions .btn .whatsapp-icon,
+  .hero-actions.mobile-actions .btn .ui-icon {
+    width: 16px !important;
+    height: 16px !important;
     flex-shrink: 0 !important;
   }
 
-  .hero-actions .btn .arrow-icon {
+  .hero-actions.mobile-actions .btn .arrow-icon {
     display: none !important;
+  }
+
+  .hero-wa-btn {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+    box-shadow: 0 8px 22px -4px rgba(16, 185, 129, 0.45) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  }
+
+  .hero-call-btn {
+    background: rgba(30, 41, 59, 0.85) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color: #ffffff !important;
+    box-shadow: 0 8px 22px -4px rgba(0, 0, 0, 0.5) !important;
+  }
+
+  /* Remove black caption pill on mobile */
+  .slide-caption-pill {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
   }
 
   /* 7. Tightened Brands Section: removes excessive barren whitespace on mobile */
