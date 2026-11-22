@@ -991,63 +991,44 @@ button {
 }
 
 /* ==========================================================================
-   RAZORPAY-INSPIRED TWO-COLUMN HERO ARCHITECTURE (Zero-Fog Video Showcase)
+   SECTION 1: HERO (FULL-BLEED CINEMATIC DISPLAY WITH OVERLAY TEXT - DESKTOP & MOBILE)
    ========================================================================== */
 .hero-section {
-  padding: 2.5rem 1.5rem 3.5rem;
-  background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+  padding: 1.5rem 1.5rem 2.5rem;
+  background: #f8fafc;
 }
 
-.razor-hero-grid {
-  display: grid;
-  grid-template-columns: 1fr 1.08fr;
+.slider-wrapper.hero-slider-display {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  background-color: #0b1120;
+  box-shadow: 0 20px 48px -12px rgba(10, 17, 40, 0.22), 0 0 0 1px rgba(10, 17, 40, 0.08);
+  min-height: 600px;
+  display: flex;
   align-items: center;
-  gap: 3.5rem;
   max-width: var(--container-max);
   margin: 0 auto;
 }
 
-.hero-content-col {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 1.25rem;
+@media (min-width: 1200px) {
+  .slider-wrapper.hero-slider-display {
+    min-height: 640px;
+  }
 }
 
-.hero-desktop-flow {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
+/* Background Hero Video Canvas (100% Clear, Zero Fog / Scrim) */
+.hero-video-container {
+  position: absolute;
+  inset: 0;
   width: 100%;
-}
-
-.hero-mobile-flow {
-  display: none;
-}
-
-/* Badges & Mobile Elements (Hidden on desktop to preserve desktop layout 100%) */
-.floating-tech-chip,
-.phone-mockup-wrapper,
-.video-corner-badge {
-  display: none;
-}
-
-.hero-visual-col {
-  position: relative;
-  width: 100%;
-}
-
-.hero-video-frame {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 10.5;
-  border-radius: 24px;
+  height: 100%;
   overflow: hidden;
-  background: var(--color-navy-950);
-  box-shadow: 0 24px 56px -12px rgba(10, 17, 40, 0.22), 0 0 0 1px rgba(10, 17, 40, 0.08);
+  z-index: 1;
+  background-color: #000000;
 }
 
-.hero-showcase-video {
+.hero-bg-video {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -1058,180 +1039,135 @@ button {
   transform: translate(-50%, -50%) scale(1.36);
   transform-origin: 38% 42%;
   pointer-events: none;
+  opacity: 1;
 }
 
-.video-floating-badge {
-  position: absolute;
-  top: 1.25rem;
-  left: 1.25rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: rgba(10, 17, 40, 0.78);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  color: #ffffff;
-  padding: 0.35rem 0.85rem;
-  border-radius: 9999px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.03em;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  z-index: 5;
-}
-
-.video-floating-badge .live-dot-pulse {
-  width: 8px;
-  height: 8px;
-  background-color: #22c55e;
-  border-radius: 50%;
-  box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.4);
-}
-
-/* Legacy Arrax Slider fallback */
-.slider-wrapper.hero-slider-display {
-  position: relative;
-  border-radius: 24px;
-  overflow: hidden;
-  background-color: var(--color-navy-950);
-  box-shadow: 0 20px 48px -12px rgba(10, 17, 40, 0.18), 0 0 0 1px rgba(10, 17, 40, 0.06);
-  min-height: 640px;
-  display: flex;
-  align-items: center;
-  user-select: none;
-}
-
-@media (min-width: 1200px) {
-  .slider-wrapper.hero-slider-display {
-    min-height: 670px;
-  }
-}
-
-/* Background Hero Video (Cinematic Slow-Motion Smartphone Repair) */
-.hero-video-container {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  z-index: 1;
-  background-color: var(--color-navy-950);
-}
-
-.hero-bg-video {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  /* Precision scale and focal shift: eliminates 86px top/bottom letterbox bars and pushes bottom-right watermark outside the container */
-  transform: translate(-50%, -50%) scale(1.36);
-  transform-origin: 35% 42%;
-  pointer-events: none;
-}
-
-/* Background Slider Track (Retained for legacy/fallback) */
-.slider-track {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  width: 300%;
-  height: 100%;
-  transition: transform 700ms cubic-bezier(0.25, 1, 0.5, 1);
-  will-change: transform;
-  z-index: 1;
-}
-
-.slide-item {
-  width: 33.333333%;
-  height: 100%;
-  flex-shrink: 0;
-  position: relative;
-  overflow: hidden;
-}
-
-.slide-image-container {
-  width: 100%;
-  height: 100%;
-  position: relative;
-}
-
-.slide-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: right 30%;
-  transform: scale(1.03);
-  transition: transform 6000ms cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-.slide-item.active .slide-img {
-  transform: scale(1);
-}
-
-/* Ambient Readability Scrim (Arrax style soft left-to-right contrast overlay) */
-.hero-display-scrim {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.97) 0%, rgba(255, 255, 255, 0.94) 38%, rgba(255, 255, 255, 0.72) 58%, rgba(255, 255, 255, 0.18) 82%, transparent 100%);
-  pointer-events: none;
-  z-index: 2;
-}
-
-@media (max-width: 900px) {
-  .hero-display-scrim {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.76) 0%, rgba(255, 255, 255, 0.6) 45%, rgba(255, 255, 255, 0.38) 78%, rgba(255, 255, 255, 0.52) 100%);
-  }
-}
-
-/* Slide Caption Pill (Top Right, showing repair precision details) */
+/* Top Right Precision Lab Badge */
 .slide-caption-pill {
   position: absolute;
   top: 1.5rem;
   right: 1.75rem;
-  background-color: rgba(10, 17, 40, 0.78);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  color: var(--color-white);
+  background-color: rgba(10, 17, 40, 0.82);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: #ffffff;
   padding: 0.45rem 1rem;
   border-radius: 9999px;
-  font-size: 0.82rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
   z-index: 5;
-  opacity: 0;
-  transform: translateY(-8px) scale(0.96);
-  transition: opacity 0.45s var(--ease-out-cubic), transform 0.45s var(--ease-out-cubic);
 }
 
-.slide-item.active .slide-caption-pill {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-  transition-delay: 0.2s;
-}
-
-.caption-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background-color: var(--color-blue-500);
-}
-
-/* Content Box Appearing Directly ON the Slider (Left Positioned) */
+/* Content Box Appearing Directly ON the Video (High-Contrast Visible Typography) */
 .hero-content.hero-overlay-box {
   position: relative;
   z-index: 5;
-  max-width: 630px;
-  padding: 3.5rem 3.25rem;
+  max-width: 620px;
+  padding: 3.5rem 3.5rem;
   display: flex;
   flex-direction: column;
-  gap: 1.35rem;
+  gap: 1.25rem;
+}
+
+/* 1. Frosted Glass Location Badge */
+.location-badge {
+  background: rgba(15, 23, 42, 0.85) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(56, 189, 248, 0.4) !important;
+  color: #38bdf8 !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45) !important;
+}
+
+.location-badge span {
+  color: #38bdf8 !important;
+  font-weight: 700 !important;
+}
+
+/* 2. Headline: Visible Pure White & Electric Cyan */
+.hero-headline {
+  color: #ffffff !important;
+  font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+  font-weight: 850;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  margin: 0;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8), 0 4px 24px rgba(0, 0, 0, 0.6);
+}
+
+.hero-headline .hero-line {
+  color: #ffffff !important;
+}
+
+.hero-headline .accent-reveal {
+  color: #38bdf8 !important;
+  background: linear-gradient(135deg, #38bdf8 0%, #7dd3fc 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 16px rgba(56, 189, 248, 0.55)) !important;
+}
+
+.accent-reveal::after {
+  background: #38bdf8 !important;
+}
+
+/* 3. Supporting Tagline: High Visibility White */
+.hero-supporting {
+  color: #ffffff !important;
+  font-size: clamp(1.05rem, 1.4vw, 1.22rem);
+  line-height: 1.5;
+  font-weight: 600;
+  margin: 0;
+  max-width: 520px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.95), 0 4px 18px rgba(0, 0, 0, 0.75);
+}
+
+/* 4. Frosted Specialist In Ticker */
+.hero-sliding-ticker {
+  background: rgba(15, 23, 42, 0.88) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45) !important;
+}
+
+.ticker-badge {
+  background: rgba(37, 99, 235, 0.4) !important;
+  color: #38bdf8 !important;
+  border: 1px solid rgba(56, 189, 248, 0.4) !important;
+}
+
+.ticker-slide {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* 5. CTAs ON the Video Canvas */
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 0.25rem;
+}
+
+.hero-wa-btn {
+  background: #22c55e !important;
+  color: #ffffff !important;
+  box-shadow: 0 8px 24px -4px rgba(34, 197, 94, 0.5) !important;
+}
+
+.hero-call-btn {
+  background: #0f172a !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0 8px 24px -4px rgba(15, 23, 42, 0.4) !important;
 }
 
 
@@ -2541,93 +2477,83 @@ button {
 
 @media (max-width: 768px) {
   /* ====================================================
-     OPTION 3: FULL-BLEED CINEMATIC DARK MODE (MOBILE ONLY)
+     FULL DISPLAY VIDEO HERO (MOBILE VIEW)
      ==================================================== */
   .hero-section {
-    padding: 1.25rem 0.85rem 1.75rem !important;
-    background: radial-gradient(circle at 50% 0%, #0f172a 0%, #070a13 65%, #030712 100%) !important;
+    padding: 0.65rem 0.65rem 1.25rem !important;
+    background: #f8fafc !important;
+  }
+
+  .slider-wrapper.hero-slider-display {
+    border-radius: 20px !important;
+    min-height: 560px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
     position: relative !important;
     overflow: hidden !important;
-  }
-
-  /* Subtle Ambient Blue Lighting Aura */
-  .hero-section::before {
-    content: '';
-    position: absolute;
-    top: -40px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 320px;
-    height: 180px;
-    background: radial-gradient(circle, rgba(37, 99, 235, 0.3) 0%, transparent 70%);
-    filter: blur(40px);
-    pointer-events: none;
-  }
-
-  /* Symmetrical Clean Grid Layout */
-  .razor-hero-grid {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    gap: 0.95rem !important;
     width: 100% !important;
-    position: relative !important;
-    z-index: 2 !important;
+    margin: 0 auto !important;
   }
 
-  .hero-content-col {
+  .hero-video-container {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    overflow: hidden !important;
+    z-index: 1 !important;
+    background: #000000 !important;
+  }
+
+  .hero-bg-video {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    transform: translate(-50%, -50%) scale(1.52) !important;
+    transform-origin: 38% 44% !important;
+    opacity: 1 !important;
+  }
+
+  .hero-content.hero-overlay-box {
+    position: relative !important;
+    z-index: 5 !important;
+    padding: 1.5rem 1rem !important;
+    max-width: 100% !important;
+    gap: 0.65rem !important;
+    width: 100% !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
     text-align: center !important;
-    gap: 0.5rem !important;
-    width: 100% !important;
   }
 
-  /* Desktop flow and unused elements hidden on mobile */
-  .hero-desktop-flow,
-  .phone-mockup-wrapper,
-  .floating-tech-chip {
-    display: none !important;
-  }
-
-  /* 1. Glassmorphic Location Pill */
   .location-badge {
     font-size: 0.65rem !important;
-    padding: 0.26rem 0.65rem !important;
-    gap: 0.35rem !important;
+    padding: 0.24rem 0.6rem !important;
+    margin: 0 auto !important;
+    white-space: nowrap !important;
     background: rgba(15, 23, 42, 0.85) !important;
     backdrop-filter: blur(12px) !important;
     -webkit-backdrop-filter: blur(12px) !important;
     border: 1px solid rgba(56, 189, 248, 0.4) !important;
     color: #38bdf8 !important;
-    border-radius: 9999px !important;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4) !important;
-    margin: 0 auto !important;
-    white-space: nowrap !important;
-    letter-spacing: 0.04em !important;
   }
 
-  .location-badge .ui-icon-sm {
-    width: 12px !important;
-    height: 12px !important;
+  .location-badge span {
+    color: #38bdf8 !important;
+    font-weight: 700 !important;
   }
 
-  .location-badge .live-dot-pulse {
-    width: 7px !important;
-    height: 7px !important;
-    background-color: #38bdf8 !important;
-    box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.4) !important;
-  }
-
-  /* 2. Headline: Crisp White & Electric Cyan/Blue Gradient */
   .hero-headline {
-    margin: 0.1rem 0 0 !important;
-    font-size: clamp(2rem, 7.5vw, 2.45rem) !important;
+    font-size: clamp(2rem, 7.8vw, 2.45rem) !important;
     line-height: 1.1 !important;
     text-align: center !important;
     color: #ffffff !important;
-    letter-spacing: -0.02em !important;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9), 0 4px 20px rgba(0, 0, 0, 0.7) !important;
   }
 
   .hero-headline .hero-line {
@@ -2635,10 +2561,11 @@ button {
   }
 
   .hero-headline .accent-reveal {
-    background: linear-gradient(135deg, #38bdf8 0%, #60a5fa 50%, #93c5fd 100%) !important;
+    color: #38bdf8 !important;
+    background: linear-gradient(135deg, #38bdf8 0%, #7dd3fc 100%) !important;
     -webkit-background-clip: text !important;
     -webkit-text-fill-color: transparent !important;
-    filter: drop-shadow(0 2px 10px rgba(56, 189, 248, 0.45)) !important;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 16px rgba(56, 189, 248, 0.55)) !important;
   }
 
   .accent-reveal::after {
@@ -2646,222 +2573,85 @@ button {
     content: none !important;
   }
 
-  /* 3. Supporting Tagline: High Readability Silver */
   .hero-supporting {
-    font-size: 0.85rem !important;
-    line-height: 1.45 !important;
-    color: #94a3b8 !important;
+    font-size: 0.88rem !important;
+    line-height: 1.4 !important;
     text-align: center !important;
-    max-width: 325px !important;
+    max-width: 320px !important;
     margin: 0 auto !important;
-  }
-
-  /* 4. Full-Bleed Widescreen Cinematic Video Canvas */
-  .hero-visual-col {
-    width: 100% !important;
-    margin: 0.15rem 0 !important;
-    position: relative !important;
-  }
-
-  .hero-video-frame {
-    display: block !important;
-    width: 100% !important;
-    aspect-ratio: 16 / 10 !important;
-    border-radius: 18px !important;
-    overflow: hidden !important;
-    position: relative !important;
-    background: #000000 !important;
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
-    box-shadow: 
-      0 16px 36px -10px rgba(0, 0, 0, 0.7),
-      0 0 30px rgba(37, 99, 235, 0.25) !important;
-  }
-
-  .hero-showcase-video {
-    position: absolute !important;
-    top: 50% !important;
-    left: 50% !important;
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-    transform: translate(-50%, -50%) scale(1.36) !important;
-    transform-origin: 38% 42% !important;
-    opacity: 0.95 !important;
-  }
-
-  /* Subtle Film Glare Sheen */
-  .hero-video-frame::after {
-    content: '' !important;
-    position: absolute !important;
-    inset: 0 !important;
-    background: linear-gradient(
-      180deg, 
-      rgba(15, 23, 42, 0.35) 0%, 
-      transparent 40%, 
-      rgba(3, 7, 18, 0.6) 100%
-    ) !important;
-    pointer-events: none !important;
-    z-index: 2 !important;
-  }
-
-  /* Video Floating Badges */
-  .video-floating-badge {
-    position: absolute !important;
-    top: 0.85rem !important;
-    left: 0.85rem !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    gap: 0.45rem !important;
-    background: rgba(10, 15, 29, 0.75) !important;
-    backdrop-filter: blur(10px) !important;
-    -webkit-backdrop-filter: blur(10px) !important;
     color: #ffffff !important;
-    padding: 0.3rem 0.65rem !important;
-    border-radius: 9999px !important;
+    font-weight: 600 !important;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.95), 0 4px 18px rgba(0, 0, 0, 0.75) !important;
+  }
+
+  .slide-caption-pill {
+    top: 0.85rem !important;
+    right: 0.85rem !important;
     font-size: 0.68rem !important;
-    font-weight: 700 !important;
-    letter-spacing: 0.04em !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
-    z-index: 5 !important;
-  }
-
-  .video-floating-badge .live-dot-pulse {
-    width: 7px !important;
-    height: 7px !important;
-    background-color: #22c55e !important;
-  }
-
-  .video-corner-badge {
-    position: absolute !important;
-    bottom: 0.75rem !important;
-    right: 0.75rem !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    gap: 0.4rem !important;
-    background: rgba(15, 23, 42, 0.82) !important;
-    backdrop-filter: blur(10px) !important;
-    -webkit-backdrop-filter: blur(10px) !important;
-    color: #38bdf8 !important;
-    padding: 0.28rem 0.6rem !important;
-    border-radius: 8px !important;
-    font-size: 0.62rem !important;
-    font-weight: 700 !important;
-    letter-spacing: 0.05em !important;
-    text-transform: uppercase !important;
-    border: 1px solid rgba(56, 189, 248, 0.35) !important;
-    z-index: 5 !important;
-  }
-
-  /* 5. Mobile Flow: Ticker & Actions */
-  .hero-mobile-flow {
+    padding: 0.3rem 0.65rem !important;
     display: flex !important;
-    flex-direction: column !important;
-    gap: 0.65rem !important;
-    width: 100% !important;
-    margin-top: 0.15rem !important;
+    opacity: 1 !important;
+    visibility: visible !important;
   }
 
-  /* Dark Frosted Specialist In Ticker */
   .hero-sliding-ticker {
     width: 100% !important;
-    max-width: 100% !important;
     box-sizing: border-box !important;
-    background: rgba(15, 23, 42, 0.85) !important;
+    padding: 0.38rem 0.75rem !important;
+    margin-top: 0.25rem !important;
+    background: rgba(15, 23, 42, 0.88) !important;
     backdrop-filter: blur(12px) !important;
     -webkit-backdrop-filter: blur(12px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.14) !important;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4) !important;
-    padding: 0.4rem 0.75rem !important;
+    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45) !important;
     border-radius: 9999px !important;
-    margin: 0 !important;
-    overflow: hidden !important;
-    gap: 0.45rem !important;
   }
 
   .ticker-badge {
-    background: rgba(37, 99, 235, 0.3) !important;
+    background: rgba(37, 99, 235, 0.4) !important;
     color: #38bdf8 !important;
-    border: 1px solid rgba(56, 189, 248, 0.35) !important;
-    padding: 0.16rem 0.48rem !important;
-    font-size: 0.62rem !important;
-    letter-spacing: 0.03em !important;
-    flex-shrink: 0 !important;
-  }
-
-  .ticker-track-window {
-    flex: 1 1 auto !important;
-    min-width: 0 !important;
-    width: 0 !important;
-    overflow: hidden !important;
-    position: relative !important;
-    height: 1.3rem !important;
+    border: 1px solid rgba(56, 189, 248, 0.4) !important;
   }
 
   .ticker-slide {
-    color: #f8fafc !important;
-    font-size: 0.74rem !important;
-    font-weight: 600 !important;
-    white-space: nowrap !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-    max-width: 100% !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5) !important;
   }
 
-  /* 6. Side-by-Side CTA Buttons */
-  .hero-actions.mobile-actions {
+  .hero-actions {
     display: flex !important;
     flex-direction: row !important;
     width: 100% !important;
-    gap: 0.65rem !important;
-    align-items: center !important;
-    margin-top: 0.1rem !important;
+    gap: 0.55rem !important;
+    margin-top: 0.25rem !important;
   }
 
-  .hero-actions.mobile-actions .btn {
+  .hero-actions .btn {
     flex: 1 !important;
-    min-width: 0 !important;
-    width: auto !important;
-    padding: 0.82rem 0.5rem !important;
-    font-size: 0.88rem !important;
+    padding: 0.8rem 0.5rem !important;
+    font-size: 0.85rem !important;
     font-weight: 700 !important;
     border-radius: 12px !important;
     justify-content: center !important;
     white-space: nowrap !important;
-    gap: 0.35rem !important;
   }
 
-  .hero-actions.mobile-actions .btn .whatsapp-icon,
-  .hero-actions.mobile-actions .btn .ui-icon {
-    width: 16px !important;
-    height: 16px !important;
-    flex-shrink: 0 !important;
-  }
-
-  .hero-actions.mobile-actions .btn .arrow-icon {
+  .hero-actions .btn .arrow-icon {
     display: none !important;
   }
 
   .hero-wa-btn {
-    background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
-    box-shadow: 0 8px 22px -4px rgba(16, 185, 129, 0.45) !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    background: #22c55e !important;
+    color: #ffffff !important;
+    box-shadow: 0 8px 24px -4px rgba(34, 197, 94, 0.5) !important;
   }
 
   .hero-call-btn {
-    background: rgba(30, 41, 59, 0.85) !important;
-    backdrop-filter: blur(10px) !important;
-    -webkit-backdrop-filter: blur(10px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    background: #0f172a !important;
     color: #ffffff !important;
-    box-shadow: 0 8px 22px -4px rgba(0, 0, 0, 0.5) !important;
-  }
-
-  /* Remove black caption pill on mobile */
-  .slide-caption-pill {
-    display: none !important;
-    opacity: 0 !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    box-shadow: 0 8px 24px -4px rgba(15, 23, 42, 0.4) !important;
   }
 
   /* 7. Tightened Brands Section: removes excessive barren whitespace on mobile */

@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ==========================================================================
      1. HERO VIDEO BACKGROUND (CINEMATIC SLOW-MOTION SMARTPHONE REPAIR)
      ========================================================================== */
-  const heroVideos = document.querySelectorAll('.hero-showcase-video, .mockup-video');
+  const heroVideos = document.querySelectorAll('.hero-bg-video, .hero-showcase-video, .mockup-video');
   if (heroVideos.length > 0) {
     heroVideos.forEach(vid => {
       vid.playbackRate = 0.65;
